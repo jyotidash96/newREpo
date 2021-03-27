@@ -2,4 +2,15 @@
     background: #0066ff!important;
 }
 
+.adminn .card{
+    
+    border: 2px solid black;
+    
+}
+.adminn .card:hover{
+    
+    background: #e2e2e2;
+    cursor: pointer;
+}
+
 
