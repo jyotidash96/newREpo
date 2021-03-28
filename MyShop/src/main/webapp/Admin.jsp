@@ -148,7 +148,7 @@ if(u==null){
       </div>
       <div class="modal-body">
           
-          <form action="OperationServlet" method="post">
+          <form action="OperationServlet" method="post" >
               
               <input type=hidden name="Operation" value="addcategory" >
               
@@ -202,15 +202,17 @@ if(u==null){
       <div class="modal-body">
           
           
-          <form action="OperationServlet" method="post">
+          <form action="OperationServlet" method="post" enctype="multipart/form-data">
                   <input type=hidden name="Operation" value="addproduct" >
               <div class="form-group">
                   
-                  <input type="text" class="form-control" name="PTitle" placeholder="Enter Product Title" required>
+                  <input type="text" class="form-control" name="PName" placeholder="Enter Product Title" required>
                   
                   
                   
               </div>
+                  
+                   
                <div class="form-group">
                   
                   <input type="text" class="form-control" name="Pprice" placeholder="Enter Product Price" required>

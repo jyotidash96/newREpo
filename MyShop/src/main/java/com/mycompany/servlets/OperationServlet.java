@@ -6,22 +6,27 @@
 package com.mycompany.servlets;
 
 import com.mycompany.Dao.CategoryDao;
+import com.mycompany.Dao.ProductDao;
 import com.mycompany.Entities.Category;
+import com.mycompany.Entities.Product;
 import com.mycompany.myshop.FactoryProvider;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 /**
  *
  * @author Guest Account
  */
 @WebServlet(name = "OperationServlet", urlPatterns = {"/OperationServlet"})
+@MultipartConfig
 public class OperationServlet extends HttpServlet {
 
     /**
@@ -61,6 +66,35 @@ public class OperationServlet extends HttpServlet {
             
             //Session hibernatesession = FactoryProvider.getFactory().Opensession();
             
+            } else if(op.trim().equals("addproduct")){
+            
+            String pname=request.getParameter("PName");
+            int PPrice=Integer.parseInt(request.getParameter("Pprice"));
+            int pdisc=Integer.parseInt(request.getParameter("pDisc"));
+            int Pquant=Integer.parseInt(request.getParameter("PQuant"));
+            String Pdesc=request.getParameter("PDesc");
+            int Pcatid=Integer.parseInt(request.getParameter("catId"));
+            Part part=request.getPart("ppic");
+            
+            Product p=new Product();
+            p.setProduct_title(pname);
+            p.setProduct_Quantity(Pquant);
+            p.setProduct_Discount(pdisc);
+            p.setProduct_Price(PPrice);
+            p.setProduct_Desc(Pdesc);
+            
+            CategoryDao catd=new CategoryDao(FactoryProvider.getFactory());
+                  Category c=  catd.getcategoryById(Pcatid);
+            
+            p.setCategory(c);
+            p.setProduct_Pic(part.getSubmittedFileName());
+            
+            ProductDao pdao=new ProductDao(FactoryProvider.getFactory());
+          int pid1=  pdao.saveProduct(p);
+            System.out.println(pid1);
+            
+            
+                    
             }
             
            

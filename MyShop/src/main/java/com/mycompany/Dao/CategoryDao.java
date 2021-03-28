@@ -57,6 +57,22 @@ public class CategoryDao {
         return list;
     
     }
+    
+    public Category getcategoryById(int caId){
+    
+    Category catId=null;    
+        try{
+            
+             Session s=this.sessionfactory.openSession();
+            catId= s.get(Category.class,caId);
+        s.close();
+        }catch(Exception e){
+        e.printStackTrace();
+        }
+   return catId;
+    
+    
+    }
  
     
 }
