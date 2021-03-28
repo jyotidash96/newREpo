@@ -23,14 +23,24 @@ public class ProductDao {
     this.sessionfactory=sessionfactory;
     }
     
-    public int saveProduct(Product p){
+    public boolean saveProduct(Product p){
+        
+        boolean f=false;
+        try{
+        
         Session s=this.sessionfactory.openSession();
         Transaction t=s.beginTransaction();
-        int pid=(int)s.save(p);
+        s.save(p);
         t.commit();
         s.close();
+        f=true;
+        }catch(Exception e){
+        e.printStackTrace();
+        f=false;
+        }
         
-        return pid;
+        
+        return f;
     
     }
     

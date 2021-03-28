@@ -203,7 +203,7 @@ if(u==null){
           
           
           <form action="OperationServlet" method="post" enctype="multipart/form-data">
-                  <input type=hidden name="Operation" value="addproduct" >
+                  <input type=hidden name="Operation" value="addproduct"/>
               <div class="form-group">
                   
                   <input type="text" class="form-control" name="PName" placeholder="Enter Product Title" required>

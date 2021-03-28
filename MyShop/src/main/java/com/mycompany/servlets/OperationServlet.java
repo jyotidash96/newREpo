@@ -74,7 +74,7 @@ public class OperationServlet extends HttpServlet {
             int Pquant=Integer.parseInt(request.getParameter("PQuant"));
             String Pdesc=request.getParameter("PDesc");
             int Pcatid=Integer.parseInt(request.getParameter("catId"));
-            Part part=request.getPart("ppic");
+            Part part=request.getPart("PPic");
             
             Product p=new Product();
             p.setProduct_title(pname);
@@ -90,8 +90,8 @@ public class OperationServlet extends HttpServlet {
             p.setProduct_Pic(part.getSubmittedFileName());
             
             ProductDao pdao=new ProductDao(FactoryProvider.getFactory());
-          int pid1=  pdao.saveProduct(p);
-            System.out.println(pid1);
+            pdao.saveProduct(p);
+            System.out.println("Success");
             
             
                     
