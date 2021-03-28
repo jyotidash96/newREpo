@@ -10,7 +10,12 @@ import com.mycompany.Dao.ProductDao;
 import com.mycompany.Entities.Category;
 import com.mycompany.Entities.Product;
 import com.mycompany.myshop.FactoryProvider;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -20,6 +25,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+
+
 
 /**
  *
@@ -91,6 +98,20 @@ public class OperationServlet extends HttpServlet {
             
             ProductDao pdao=new ProductDao(FactoryProvider.getFactory());
             pdao.saveProduct(p);
+            
+            String path = request.getRealPath("img") + File.separator + "products"+ File.separator + part.getSubmittedFileName();
+                System.out.println(path);
+                
+                FileOutputStream fo=new FileOutputStream(path);
+                InputStream fi= part.getInputStream();
+                
+                byte[] data= new byte[fi.available()];
+                fi.read(data);
+                fo.write(data);
+                fo.close();
+                
+                
+            
             System.out.println("Success");
             
             
